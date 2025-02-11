@@ -61,6 +61,11 @@ IotWebConf iotWebConf(thingName.c_str(), &dnsServer, &web_server, WIFI_PASSWORD,
 // Camera initialization result
 esp_err_t camera_init_result;
 
+//redefine serial 2 for movement controls
+#define RXD2 14
+#define TXD2 15
+
+
 void handle_root()
 {
   log_v("Handle root");
@@ -323,6 +328,7 @@ void setup()
 
   Serial.begin(115200);
   Serial.setDebugOutput(true);
+  Serial2.begin(115200, SERIAL_8N1, RXD2, TXD2);
 
 #ifdef ARDUINO_USB_CDC_ON_BOOT
   // Delay for USB to connect/settle
